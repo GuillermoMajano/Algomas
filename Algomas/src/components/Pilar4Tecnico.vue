@@ -1,7 +1,7 @@
 <template>
   <section id="pilar4" class="py-20">
     <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold text-slate-800 text-center mb-12">El Ecosistema de Apoyo</h2>
+      <h2 class="text-3xl font-bold text-slate-800 text-center mb-12">Ecosistema de Apoyo</h2>
       <div class="grid lg:grid-cols-3 gap-8 text-center">
         <div>
           <h3 class="text-2xl font-bold text-teal-700 mb-3">Coaches</h3>

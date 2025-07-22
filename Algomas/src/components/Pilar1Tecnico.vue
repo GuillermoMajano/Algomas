@@ -33,13 +33,43 @@ const algorithmsData = [
       { name: 'Árboles Binarios de Búsqueda (BST)', desc: 'Almacenamiento ordenado para búsqueda rápida.', complexity: 'O(log N) promedio', space: 'O(N)' },
       { name: 'Tablas Hash (Hash Maps)', desc: 'Mapeo de claves a valores para acceso casi constante.', complexity: 'O(1) promedio', space: 'O(N)' }
     ]
-  },
-  {
+  },{
     category: 'Búsqueda y Ordenamiento',
     items: [
-      { name: 'Búsqueda Binaria', desc: 'Encontrar un elemento en una lista ordenada.', complexity: 'O(log N)', space: 'O(1)' },
       { name: 'Merge Sort, Quick Sort', desc: 'Ordenar eficientemente colecciones de datos.', complexity: 'O(N log N)', space: 'O(N) / O(log N)' }
-    ]
-  }
+    ]},
+  {
+    category: 'Algoritmos de Búsqueda en Grafos',
+                    items: [
+                        { name: 'BFS (Breadth-First Search)', desc: 'Recorrido por niveles, camino más corto.', complexity: 'O(V+E)', space: 'O(V)' },
+                        { name: 'DFS (Depth-First Search)', desc: 'Recorrido en profundidad, detección de ciclos.', complexity: 'O(V+E)', space: 'O(V)' },
+                        { name: 'Algoritmo de Dijkstra', desc: 'Camino más corto en grafos con pesos no negativos.', complexity: 'O(E log V)', space: 'O(V+E)' }
+                    ]
+                } ,
+    {
+                    category: 'Programación Dinámica',
+                    items: [
+                        { name: 'Problema de la Mochila', desc: 'Optimización de la selección de elementos con restricciones.', complexity: 'O(N*W)', space: 'O(N*W)' },
+                        { name: 'Longest Common Subsequence (LCS)', desc: 'Encontrar la secuencia común más larga.', complexity: 'O(N*M)', space: 'O(N*M)' }
+                    ]
+                },
+                 {
+                    category: 'Algoritmos de Cadenas',
+                    items: [
+                        { name: 'KMP (Knuth-Morris-Pratt)', desc: 'Búsqueda eficiente de patrones en texto.', complexity: 'O(N+M)', space: 'O(M)' }
+                    ]
+                },
+                {
+                    category: 'Teoría de Números',
+                    items: [
+                        { name: 'Criba de Eratóstenes', desc: 'Encontrar todos los números primos hasta un límite.', complexity: 'O(N log log N)', space: 'O(N)' }
+                ]
+                },
+                {
+                    category: 'Algoritmos de Geometría Computacional',
+                    items: [
+                        { name: 'Convex Hull', desc: 'Encontrar el envolvente convexo de un conjunto de puntos.', complexity: 'O(N log N)', space: 'O(N)' }
+                    ]
+                }
 ]
 </script>

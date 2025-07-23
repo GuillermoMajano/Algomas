@@ -2,12 +2,12 @@
   <section id="pilar1" class="py-20 bg-white">
     <div class="container mx-auto px-6">
       <h2 class="text-3xl font-bold text-slate-800 text-center mb-12">Dominio Técnico Fundamental</h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div v-for="(group, index) in algorithmsData" :key="index" class="algo-card bg-white rounded-lg shadow-md overflow-hidden border border-transparent hover:border-teal-500 cursor-pointer transition-all duration-300">
+      <div  class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" >
+        <div v-for="(group, index) in algorithmsData" :key="index" class="expandable algo-card bg-white rounded-lg shadow-md border border-transparent hover:border-teal-500 cursor-pointer"  tabindex="0" aria-expanded="false">
           <div class="p-6">
             <h3 class="font-bold text-lg text-teal-700">{{ group.category }}</h3>
           </div>
-          <div class="algo-card-details bg-slate-50 px-6">
+          <div class="expandable-content algo-card-details bg-slate-50 px-6">
             <ul class="pt-4 pb-6 space-y-3">
               <li v-for="item in group.items" :key="item.name" class="border-l-2 border-teal-200 pl-3">
                 <p class="font-semibold text-slate-800">{{ item.name }}</p>
@@ -23,7 +23,27 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+
+document.querySelectorAll('.expandable').forEach(el => {
+  el.addEventListener('click', function () {
+    const isExpanded = this.classList.contains('expanded');
+    const content = this.querySelector('.expandable-content');
+
+    // Alternar clase
+    this.classList.toggle('expanded');
+
+    // Actualizar atributo ARIA
+    this.setAttribute('aria-expanded', !isExpanded);
+
+    // Opcional: cambiar el texto del encabezado
+    const firstParagraph = this.querySelector('p');
+    if (firstParagraph) {
+      firstParagraph.textContent = !isExpanded 
+        ? 'Haz clic para ocultar' 
+        : 'Haz clic aquí para ver más';
+    }
+  });
+});
 
 const algorithmsData = [
   {
@@ -73,3 +93,42 @@ const algorithmsData = [
                 }
 ]
 </script>
+
+<style>
+.expandable {
+  width: 100%;
+  max-width: 500px;
+  margin: 1rem auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  padding: 1rem;
+  user-select: none;
+}
+
+.expandable:hover {
+  background-color: #edf0f3;
+}
+
+/* Contenido que se despliega */
+.expandable-content {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.4s ease-out;
+  padding: 0 1rem;
+}
+
+/* Estado expandido */
+.expandable.expanded .expandable-content {
+  height: auto;
+  padding: 1rem 1rem;
+}
+
+/* Opcional: cambiar texto o estilo cuando está expandido */
+.expandable:not(.expanded) .expandable-content {
+  display: none; /* Mejor UX: evita que se lea en lectores de pantalla si está cerrado */
+}
+
+
+</style>

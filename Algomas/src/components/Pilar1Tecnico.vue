@@ -142,7 +142,7 @@ const algorithmsData = [
  max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-  background-color: #eef7fc;
+  background-color: #feffff;
 }
 
 
@@ -159,6 +159,7 @@ const algorithmsData = [
 
 .expandable.activo .expandable-content {
   max-height: 400px;
+  margin: -1px;
 }
 
 /* Opcional: cambiar texto o estilo cuando está expandido */

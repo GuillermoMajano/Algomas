@@ -3,12 +3,12 @@
     <div class="container mx-auto px-6">
       <h2 class="text-3xl font-bold text-slate-800 text-center mb-12">Dominio Técnico Fundamental</h2>
       <div  class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" >
-        <div v-for="(group, index) in algorithmsData" :key="index" class="expandable algo-card bg-white rounded-lg shadow-md border border-transparent hover:border-teal-500 cursor-pointer"  tabindex="0" aria-expanded="false">
-          <div class="p-6">
+        <div v-for="(group, index) in algorithmsData" :key="index" class="expandable"  tabindex="0"  role="button">
+          <div class="p-6 expandable-titulo">
             <h3 class="font-bold text-lg text-teal-700">{{ group.category }}</h3>
           </div>
-          <div class="expandable-content algo-card-details bg-slate-50 px-6">
-            <ul class="pt-4 pb-6 space-y-3">
+          <div class="expandable-content algo-card-details bg-slate-50">
+            <ul class="pt-4 pb-6 ">
               <li v-for="item in group.items" :key="item.name" class="border-l-2 border-teal-200 pl-3">
                 <p class="font-semibold text-slate-800">{{ item.name }}</p>
                 <p class="text-sm text-slate-600">{{ item.desc }}</p>
@@ -24,26 +24,46 @@
 
 <script setup>
 
-document.querySelectorAll('.expandable').forEach(el => {
-  el.addEventListener('click', function () {
-    const isExpanded = this.classList.contains('expanded');
-    const content = this.querySelector('.expandable-content');
+// Espera a que el DOM esté completamente cargado antes de ejecutar el script
+document.addEventListener('DOMContentLoaded', () => {
+    // Selecciona todos los elementos con la clase 'acordeon-item'
+    const acordeonItems = document.querySelectorAll('.expandable');
 
-    // Alternar clase
-    this.classList.toggle('expanded');
+    // Itera sobre cada ítem del acordeón para añadir un event listener
+    acordeonItems.forEach(item => {
+        // Selecciona el título dentro de cada ítem del acordeón
+        const titulo = item.querySelector('.expandable-titulo');
 
-    // Actualizar atributo ARIA
-    this.setAttribute('aria-expanded', !isExpanded);
+        // Añade un event listener para el evento 'click' al título
+        titulo.addEventListener('click', () => {
+            // Cierra cualquier otro ítem del acordeón que esté abierto
+            acordeonItems.forEach(otherItem => {
+                // Si el ítem actual no es el que se clickeó Y tiene la clase 'activo'
+                if (otherItem !== item && otherItem.classList.contains('activo')) {
+                    // Remueve la clase 'activo' para cerrarlo
+                    otherItem.classList.remove('activo');
+                    // Restablece el padding del contenido para una transición suave al cerrar
+                    otherItem.querySelector('.expandable-content').style.padding = '0px';
+                }
+            });
 
-    // Opcional: cambiar el texto del encabezado
-    const firstParagraph = this.querySelector('p');
-    if (firstParagraph) {
-      firstParagraph.textContent = !isExpanded 
-        ? 'Haz clic para ocultar' 
-        : 'Haz clic aquí para ver más';
-    }
-  });
+            // Alterna la clase 'activo' en el ítem del acordeón que fue clickeado
+            // Si tiene 'activo', lo quita; si no lo tiene, lo añade
+            item.classList.toggle('activo');
+
+            // Ajusta el padding del contenido del ítem clickeado
+            const contenido = item.querySelector('.expandable-content');
+            if (item.classList.contains('activo')) {
+                // Si el ítem está ahora activo (abierto), aplica el padding
+                contenido.style.padding = '15px 0px'; // Coincide con el padding en CSS
+            } else {
+                // Si el ítem está ahora inactivo (cerrado), quita el padding
+                contenido.style.padding = '0px';
+            }
+        });
+    });
 });
+
 
 const algorithmsData = [
   {
@@ -96,16 +116,15 @@ const algorithmsData = [
 
 <style>
 .expandable {
-  width: 100%;
-  max-width: 500px;
+  width: 90%;
+  max-width: 700px;
   margin: 1rem auto;
   border: 1px solid #ddd;
   border-radius: 8px;
-  cursor: pointer;
   background-color: #f8f9fa;
-  padding: 1rem;
-  user-select: none;
+
 }
+
 
 .expandable:hover {
   background-color: #edf0f3;
@@ -113,22 +132,26 @@ const algorithmsData = [
 
 /* Contenido que se despliega */
 .expandable-content {
-  height: 0;
+  max-height: 100px; /* Comienza colapsado */
   overflow: hidden;
-  transition: height 0.4s ease-out;
-  padding: 0 1rem;
+  transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+  background-color: #eef7fc;
 }
 
+.expandable-content li {
+    padding: 12px 25px; /* Padding para los elementos de la lista */
+    border-bottom: 1px solid #eef7fc; /* Separador suave para los ítems de la lista */
+}
+
+
 /* Estado expandido */
-.expandable.expanded .expandable-content {
-  height: auto;
-  padding: 1rem 1rem;
+.expandable.activo .expandable-content {
+
+   max-height: 300px;
+  padding: 15px 0px;
 }
 
 /* Opcional: cambiar texto o estilo cuando está expandido */
-.expandable:not(.expanded) .expandable-content {
-  display: none; /* Mejor UX: evita que se lea en lectores de pantalla si está cerrado */
-}
 
 
 </style>

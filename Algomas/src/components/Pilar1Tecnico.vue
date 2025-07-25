@@ -8,8 +8,8 @@
             <h3 class="font-bold text-lg text-teal-700">{{ group.category }}</h3>
           </div>
           <div class="expandable-content algo-card-details bg-slate-50">
-            <ul class="pt-4 pb-6 ">
-              <li v-for="item in group.items" :key="item.name" class="border-l-2 border-teal-200">
+            <ul>
+              <li v-for="item in group.items" :key="item.name" class="">
                 <p class="font-semibold text-slate-800">{{ item.name }}</p>
                 <p class="text-sm text-slate-600">{{ item.desc }}</p>
                 <p class="text-xs text-slate-500 mt-1">Tiempo: {{ item.complexity }} | Espacio: {{ item.space }}</p>
@@ -121,18 +121,19 @@ const algorithmsData = [
   margin: 1rem auto;
   border: 1px solid #ddd;
   border-radius: 8px;
-  background-color: #f8f9fa;
+  background-color: #ffffff;
+  overflow: hidden;
 
 }
 
 .expandable-titulo {
   padding: 20px;
   cursor: pointer;
-  background-color: #f1f5f9; /* Color de fondo suave */
+  background-color: #feffff; /* Color de fondo suave */
   border-bottom: 1px solid #e2e8f0; /* Línea divisoria suave */
 }
-.expandable:hover {
-  background-color: #5397db;
+.expandable-titulo:hover {
+  background-color: #eceff1;
 }
 
 /* Contenido que se despliega */
@@ -144,16 +145,20 @@ const algorithmsData = [
   background-color: #eef7fc;
 }
 
+
+.expandable-content ul {
+  list-style: none; /* Elimina los puntos de la lista */
+  padding: 0; /* Elimina el padding por defecto */
+  margin: 0; /* Elimina el margen por defecto */
+}
 .expandable-content li {
     padding: 12px 25px; /* Padding para los elementos de la lista */
-    border-bottom: 1px solid #eef7fc; /* Separador suave para los ítems de la lista */
+    border-bottom: 1px solid #ffffff; /* Separador suave para los ítems de la lista */
 }
 
 
-/* Estado expandido */
 .expandable.activo .expandable-content {
-  max-height: 300px;
-  
+  max-height: 400px;
 }
 
 /* Opcional: cambiar texto o estilo cuando está expandido */

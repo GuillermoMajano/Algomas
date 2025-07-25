@@ -9,7 +9,7 @@
           </div>
           <div class="expandable-content algo-card-details bg-slate-50">
             <ul class="pt-4 pb-6 ">
-              <li v-for="item in group.items" :key="item.name" class="border-l-2 border-teal-200 pl-3">
+              <li v-for="item in group.items" :key="item.name" class="border-l-2 border-teal-200">
                 <p class="font-semibold text-slate-800">{{ item.name }}</p>
                 <p class="text-sm text-slate-600">{{ item.desc }}</p>
                 <p class="text-xs text-slate-500 mt-1">Tiempo: {{ item.complexity }} | Espacio: {{ item.space }}</p>
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Remueve la clase 'activo' para cerrarlo
                     otherItem.classList.remove('activo');
                     // Restablece el padding del contenido para una transición suave al cerrar
-                    otherItem.querySelector('.expandable-content').style.padding = '0px';
+                    otherItem.querySelector('.expandable-content').style.height = '0px';
                 }
             });
 
@@ -55,10 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const contenido = item.querySelector('.expandable-content');
             if (item.classList.contains('activo')) {
                 // Si el ítem está ahora activo (abierto), aplica el padding
-                contenido.style.padding = '15px 0px'; // Coincide con el padding en CSS
+                contenido.style.maxheight = '0'; // Coincide con el padding en CSS
             } else {
                 // Si el ítem está ahora inactivo (cerrado), quita el padding
-                contenido.style.padding = '0px';
+                contenido.style.maxheight = '0';
             }
         });
     });
@@ -125,14 +125,20 @@ const algorithmsData = [
 
 }
 
-
+.expandable-titulo {
+  padding: 20px;
+  cursor: pointer;
+  background-color: #f1f5f9; /* Color de fondo suave */
+  border-bottom: 1px solid #e2e8f0; /* Línea divisoria suave */
+}
 .expandable:hover {
-  background-color: #edf0f3;
+  background-color: #5397db;
 }
 
 /* Contenido que se despliega */
 .expandable-content {
-  max-height: 100px; /* Comienza colapsado */
+ /* Comienza colapsado */
+ max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s ease-out, padding 0.4s ease-out;
   background-color: #eef7fc;
@@ -146,9 +152,8 @@ const algorithmsData = [
 
 /* Estado expandido */
 .expandable.activo .expandable-content {
-
-   max-height: 300px;
-  padding: 15px 0px;
+  max-height: 300px;
+  
 }
 
 /* Opcional: cambiar texto o estilo cuando está expandido */

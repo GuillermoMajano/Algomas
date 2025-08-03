@@ -7,7 +7,7 @@
           <div class="p-6 expandable-titulo">
             <h3 class="font-bold text-lg text-teal-700">{{ group.category }}</h3>
           </div>
-          <div class="expandable-content algo-card-details bg-slate-50">
+          <div class="expandable-content  algo-card-details bg-slate-50">
             <ul>
               <li v-for="item in group.items" :key="item.name" class="">
                 <p class="font-semibold text-slate-800">{{ item.name }}</p>
@@ -115,8 +115,11 @@ const algorithmsData = [
 </script>
 
 <style>
+.container {
+ overflow: hidden;
+}
 .expandable {
-  width: 90%;
+  width: 90%; 
   max-width: 700px;
   margin: 1rem auto;
   border: 1px solid #ddd;
@@ -139,10 +142,10 @@ const algorithmsData = [
 /* Contenido que se despliega */
 .expandable-content {
  /* Comienza colapsado */
- max-height: 0;
+  max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-  background-color: #feffff;
+  background-color: #fcfcfd;
 }
 
 
@@ -153,7 +156,7 @@ const algorithmsData = [
 }
 .expandable-content li {
     padding: 12px 25px; /* Padding para los elementos de la lista */
-    border-bottom: 1px solid #ffffff; /* Separador suave para los ítems de la lista */
+    border-bottom: 1px solid #e7e7e7; /* Separador suave para los ítems de la lista */
 }
 
 
@@ -161,7 +164,10 @@ const algorithmsData = [
   max-height: 400px;
   margin: -1px;
 }
-
+.expandable.activo .expandable-titulo {
+  background-color: #f0f4f8; /* Cambia el color de fondo al expandir */
+  color : #1e293b; /* Cambia el color del texto al expandir */
+}
 /* Opcional: cambiar texto o estilo cuando está expandido */
 
 
